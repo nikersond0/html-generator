@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+function View(form) {
+msg=open("","DisplayWindow","status=1,scrollbars=1");
+msg.document.write(form.Text2.value);
+}
+function Generate(form) {
+var txt="<html><HEAD><TITLE>"+form.Name.value+"</TITLE></HEAD>\r\n";
+txt+=
+"<CENTER><h1><font color=red>"+form.Name.value+"</font></h1></CENTER><hr>\r\n";
+txt+="<body><font size=4>\r\n";
+if(form.Text1.value)    
+txt+=form.Text1.value+"\r\n";    if(form.Fav1URL.value||form.Fav2URL.value||form.Fav3URL.value||form.Fav4URL.value||form.Fav5URL.value||form.Fav6URL.value) {
+txt+="<hr><font>Мои любимые сайты:<BR><ul>\r\n";
+if(form.Fav1URL.value)          
+txt+="<LI><a href="+form.Fav1URL.value+">"+form.Fav1Title.value+"</a><BR>\r\n";
+if(form.Fav2URL.value)          
+txt+="<LI><a href="+form.Fav2URL.value+">"+form.Fav2Title.value+"</a><BR>\r\n"; 
+if(form.Fav3URL.value)          
+txt+="<LI><a href="+form.Fav3URL.value+">"+form.Fav3Title.value+"</a><BR>\r\n"; 
+if(form.Fav4URL.value)          
+txt+="<LI><a href="+form.Fav4URL.value+">"+form.Fav4Title.value+"</a><BR>\r\n"; 
+if(form.Fav5URL.value)          
+txt+="<LI><a href="+form.Fav5URL.value+">"+form.Fav5Title.value+"</a><BR>\r\n"; 
+if(form.Fav6URL.value)          
+txt+="<LI><a href="+form.Fav6URL.value+">"+form.Fav6Title.value+"</a><BR>\r\n"; 
+txt+="</ul></font>";    
+}
+if(form.EMail.value){   
+txt+="<hr>Вопросы? Комментарии? Пишите мне на почту:\r\n"; 
+txt+="<address><a href=mailto:"+form.EMail.value+">"+form.EMail.value+"</address>\r\n"; 
+}
+txt+="</font></body></html>";
+form.Text2.value=txt;
+}
+function AddText(form, Action){
+var AddTxt="";
+var txt="";
+if(Action==1){  
+txt=prompt("Текст для заголовка 1 уровня.","Text");      
+if(txt!=null)           
+AddTxt="<h1>"+txt+"</h1>\r\n";  
+}
+if(Action==2){  
+txt=prompt("Текст для заголовка 2 уровня.","Text");      
+if(txt!=null)           
+AddTxt="<h2>"+txt+"</h2>\r\n";  
+}
+if(Action==3){  
+txt=prompt("Текст для заголовка 3 уровня.","Text");      
+if(txt!=null)           
+AddTxt="<h3>"+txt+"</h3>\r\n";  
+}
+if(Action==4) {  
+txt=prompt("Текст, который нужно сделать жирным.","Text");     
+if(txt!=null)           
+AddTxt="<b>"+txt+"</b>";        
+}
+if(Action==5) {  
+txt=prompt("Текст, который нужно сделать курсивным","Text");     
+if(txt!=null)           
+AddTxt="<i>"+txt+"</i>";        
+}
+if(Action==6) AddTxt="\r\n<p>";
+if(Action==7) AddTxt="<BR>\r\n";
+if(Action==8) AddTxt="<hr>\r\n";
+if(Action==9) {  
+txt=prompt("Введите URL для ссылки.","http://");      
+if(txt!=null){          
+AddTxt="<a href="+txt+">";              
+txt=prompt("Тескт, который будет отображаться","Text");              
+AddTxt+=txt+"</a>\r\n";         
+   }
+}
+if(Action==10) { 
+txt=prompt("Введите URL картинки","URL");    
+if(txt!=null)           
+AddTxt="<img src="+txt+">\r\n"; 
+}
+form.Text1.value+=AddTxt;
+}
+function ResetPage(form) {
+if(confirm("Сбросить страницу?")) { 
+form.Text1.value="";    
+form.Text2.value="";    
+form.Name.value="";     
+form.EMail.value="";    
+form.Fav1URL.value="";  
+form.Fav1Title.value="";        
+form.Fav2URL.value="";  
+form.Fav2Title.value="";        
+form.Fav3URL.value="";  
+form.Fav3Title.value="";        
+form.Fav4URL.value="";  
+form.Fav4Title.value="";        
+form.Fav5URL.value="";  
+form.Fav5Title.value="";        
+form.Fav6URL.value="";  
+form.Fav6Title.value="";        
+   }
+}
+</SCRIPT>
+<meta charset="utf-8">
+<title>Генератор HTML страниц</title>
+</head>
+<BODY>
+<CENTER>
+<P>Инструкция:<OL>
+<LI>Заполните необходимую информацию для создания страницы.
+<LI>Нажмите "Сгенерировать страницу".
+<LI>Вы можете сделать поправки в текстовом поле.
+<LI>Нажмите "Предосмотр", чтобы увидеть страницу.
+<LI>Если Вы хотите сохранить код страницы, скопируйте и вставьте его в текстовый редактор (сохранить в расширении .html или .htm).</OL>
+<HR>
+<FORM ACTION="">
+<TABLE border=2>
+<TR><TD>Название страницы:<TD>
+<input type="text" name="Name" size=30>
+<TR><TD>Ваш E-Mail(*):<TD>
+<input type="text" name="EMail" size=30><TR><TD colspan=2>Ваши любимые сайты:(*)
+<TR><TD>URL:<TD>Название:
+<TR><TD><input type="text" name="Fav1URL" size=30>
+<TD><input type="text" name="Fav1Title" size=30>
+<TR><TD><input type="text" name="Fav2URL" size=30>
+<TD><input type="text" name="Fav2Title" size=30>
+<TR><TD><input type="text" name="Fav3URL" size=30>
+<TD><input type="text" name="Fav3Title" size=30>
+<TR><TD><input type="text" name="Fav4URL" size=30>
+<TD><input type="text" name="Fav4Title" size=30>
+<TR><TD><input type="text" name="Fav5URL" size=30>
+<TD><input type="text" name="Fav5Title" size=30>
+<TR><TD><input type="text" name="Fav6URL" size=30>
+<TD><input type="text" name="Fav6Title" size=30>
+<TR><TD colspan=2>Тело страницы(*):
+<TR align=center><TD colspan=2>
+<input type="Button" value="Заголовок1" onClick="AddText(this.form,1);">
+<input type="Button" value="Заголовок2" onClick="AddText(this.form,2);">
+<input type="Button" value="Заголовок3" onClick="AddText(this.form,3);">
+<input type="button" value="Жирный" onClick="AddText(this.form,4);">
+<input type="button" value="Курсивный" onClick="AddText(this.form,5);">
+<BR><input type="button" value="Параграф" onClick="AddText(this.form,6);">
+<input type="button" value="Обрыв строки" onClick="AddText(this.form,7);">
+<input type="button" value="Линия" onClick="AddText(this.form,8);">
+<input type="button" value="Ссылка" onClick="AddText(this.form,9);">
+<input type="button" value="Картинка" onClick="AddText(this.form,10);">
+<BR>
+<textarea name="Text1" Rows=8 Cols=60></textarea>
+<TR align=center><TD colspan=2><input type="button" value="Сгенерировать страницу" onClick="Generate(this.form);"><caption>(* - необязательные пункты)</caption>
+</TABLE>
+<HR>
+<input type="button" value="Сбросить" onClick="ResetPage(this.form);">
+<input type="button" value="Автор" onClick="alert('Copyright (C) Tim Helvey')">
+<input type="button" value="Предосмотр" onClick="View(this.form);"><BR>
+<textarea name="Text2" rows=8 Cols=70></textarea>
+</FORM>
+</CENTER>
+</body>
+</html>
