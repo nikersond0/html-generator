@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<HEAD>
-<SCRIPT LANGUAGE="JavaScript">
+<head>
+<script language="JavaScript">
 function View(form) {
 msg=open("","DisplayWindow","status=1,scrollbars=1");
 msg.document.write(form.Text2.value);
 }
 function Generate(form) {
-var txt="<html><HEAD><TITLE>"+form.Name.value+"</TITLE></HEAD>\r\n";
+var txt="<html><head><title>"+form.Name.value+"</title><meta charset=utf-8><link rel=stylesheet href=/style.css></head>\r\n";
 txt+=
-"<CENTER><h1><font color=red>"+form.Name.value+"</font></h1></CENTER><hr>\r\n";
+"<h1><font color=red>"+form.Name.value+"</font></h1><hr>\r\n";
 txt+="<body><font size=4>\r\n";
 if(form.Text1.value)    
 txt+=form.Text1.value+"\r\n";    if(form.Fav1URL.value||form.Fav2URL.value||form.Fav3URL.value||form.Fav4URL.value||form.Fav5URL.value||form.Fav6URL.value) {
-txt+="<hr><font>Мои любимые сайты:<BR><ul>\r\n";
+txt+="<hr><font>Мои любимые сайты:<br><ul>\r\n";
 if(form.Fav1URL.value)          
 txt+="<LI><a href="+form.Fav1URL.value+">"+form.Fav1Title.value+"</a><BR>\r\n";
 if(form.Fav2URL.value)          
@@ -63,19 +63,23 @@ txt=prompt("Текст, который нужно сделать курсивн�
 if(txt!=null)           
 AddTxt="<i>"+txt+"</i>";        
 }
-if(Action==6) AddTxt="\r\n<p>";
-if(Action==7) AddTxt="<BR>\r\n";
+if(Action==6){  
+txt=prompt("Текст параграфа","Text");      
+if(txt!=null)           
+AddTxt="<p>"+txt+"</p>\r\n";  
+}
+if(Action==7) AddTxt="<br>\r\n";
 if(Action==8) AddTxt="<hr>\r\n";
 if(Action==9) {  
-txt=prompt("Введите URL для ссылки.","http://");      
+txt=prompt("Введите URI для ссылки.","/pages/");      
 if(txt!=null){          
 AddTxt="<a href="+txt+">";              
-txt=prompt("Тескт, который будет отображаться","Text");              
+txt=prompt("Текст, который будет отображаться","Text");              
 AddTxt+=txt+"</a>\r\n";         
    }
 }
 if(Action==10) { 
-txt=prompt("Введите URL картинки","URL");    
+txt=prompt("Введите URI картинки","/pics/");    
 if(txt!=null)           
 AddTxt="<img src="+txt+">\r\n"; 
 }
@@ -101,26 +105,29 @@ form.Fav6URL.value="";
 form.Fav6Title.value="";        
    }
 }
-</SCRIPT>
+</script>
 <meta charset="utf-8">
-<title>Генератор HTML страниц</title>
+<title>Генератор страниц | Хостинг.nk</title>
 </head>
-<BODY>
-<CENTER>
-<P>Инструкция:<OL>
-<LI>Заполните необходимую информацию для создания страницы.
-<LI>Нажмите "Сгенерировать страницу".
-<LI>Вы можете сделать поправки в текстовом поле.
-<LI>Нажмите "Предосмотр", чтобы увидеть страницу.
-<LI>Если Вы хотите сохранить код страницы, скопируйте и вставьте его в текстовый редактор (сохранить в расширении .html или .htm).</OL>
-<HR>
-<FORM ACTION="">
-<TABLE border=2>
-<TR><TD>Название страницы:<TD>
+<body>
+<center>
+<p>Инструкция:<ol>
+<li>Заполните необходимую информацию для создания страницы.
+<li>Нажмите "Сгенерировать страницу".
+<li>Вы можете сделать поправки в текстовом поле.
+<li>Нажмите "Предосмотр", чтобы увидеть страницу.
+<li>Если Вы хотите сохранить код страницы, скопируйте и вставьте его в текстовый редактор (сохранить в расширении .html или .htm).
+<li>Чтобы Ваш сайт появился в каталоге, нужно связаться с администратором хостинга.
+<li>Сайт может быть заблокирован администрацей из-за частых жалоб.
+</ol>
+<hr>
+<form action="">
+<table border=2>
+<tr><td>Название страницы:<td>
 <input type="text" name="Name" size=30>
-<TR><TD>Ваш E-Mail(*):<TD>
+<tr><td>Ваш E-Mail(*):<td>
 <input type="text" name="EMail" size=30><TR><TD colspan=2>Ваши любимые сайты:(*)
-<TR><TD>URL:<TD>Название:
+<tr><TD>URL:<TD>Название:
 <TR><TD><input type="text" name="Fav1URL" size=30>
 <TD><input type="text" name="Fav1Title" size=30>
 <TR><TD><input type="text" name="Fav2URL" size=30>
@@ -133,7 +140,7 @@ form.Fav6Title.value="";
 <TD><input type="text" name="Fav5Title" size=30>
 <TR><TD><input type="text" name="Fav6URL" size=30>
 <TD><input type="text" name="Fav6Title" size=30>
-<TR><TD colspan=2>Тело страницы(*):
+<TR><TD colspan=2>Тело страницы:
 <TR align=center><TD colspan=2>
 <input type="Button" value="Заголовок1" onClick="AddText(this.form,1);">
 <input type="Button" value="Заголовок2" onClick="AddText(this.form,2);">
@@ -151,10 +158,24 @@ form.Fav6Title.value="";
 </TABLE>
 <HR>
 <input type="button" value="Сбросить" onClick="ResetPage(this.form);">
-<input type="button" value="Автор" onClick="alert('Copyright (C) Tim Helvey')">
+<input type="button" value="Автор" onClick="alert('Tim Helvey, nakizz: Generator (s1.5)')">
 <input type="button" value="Предосмотр" onClick="View(this.form);"><BR>
-<textarea name="Text2" rows=8 Cols=70></textarea>
+<textarea name="Text2" rows=8 Cols=50></textarea>
 </FORM>
+<table border="1">
+	<tr>
+		<th>Каталог сайтов</th>
+		<td><a href="/pages/catalog.html">catalog.nk</a></td>
+	</tr>
+	<tr>
+		<th>Загрузить страницу</th>
+		<td><a href="/pages/upload.php">upload.nk</a></td>
+	</tr>
+	<tr>
+		<th>Чат</th>
+		<td><a href="/community/tw.html">chat.nk</a></td>
+	</tr>
+</table>
 </CENTER>
 </body>
 </html>
